@@ -1,0 +1,11 @@
+
+{
+  "name": "Live Modulation View",
+  "short_name": "Modulation",
+  "description": "An interactive electronics and modulation learning tool.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071426",
+  "theme_color": "#071426"
+}
