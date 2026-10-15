@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modulation Simulator Lab</title>
+<style>
+:root{--bg:#061225;--panel:#0b1c35;--panel2:#102747;--line:#1d426d;--text:#e8f2ff;--muted:#9db5d4;--blue:#268cff;--cyan:#21d4fd;--green:#27e0ad;--yellow:#ffca55;--pink:#ff5ebc;--red:#ff667d;--shadow:0 12px 30px #0003}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#10294b 0,#061225 48%,#040b17 100%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}button,input,select{font:inherit}button{cursor:pointer}.top{padding:20px clamp(14px,3vw,34px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#07172be8;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}.brand{display:flex;align-items:center;gap:12px}.logo{font-size:32px;color:var(--cyan)}h1{font-size:clamp(21px,3vw,30px);margin:0;letter-spacing:-.5px}.subtitle{color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn,.tab{border:1px solid #285587;color:var(--text);background:#0c2442;border-radius:12px;padding:9px 13px}.btn.primary{background:linear-gradient(135deg,#1683ff,#0862d9);border-color:#2c91ff;font-weight:700}.btn:hover,.tab:hover{filter:brightness(1.2)}.layout{max-width:1600px;margin:auto;padding:18px;display:grid;grid-template-columns:220px minmax(0,1fr) 285px;gap:16px}.panel{background:linear-gradient(145deg,#0b1d36f5,#07162bf5);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);min-width:0}.side{padding:13px;align-self:start}.section-title{font-size:13px;text-transform:uppercase;letter-spacing:1.1px;color:#a9c7eb;font-weight:800;margin:5px 7px 10px}.navbtn{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1px solid transparent;background:transparent;color:#c6d9f2;padding:10px;border-radius:10px;margin:3px 0}.navbtn span{font-size:18px;width:25px;text-align:center}.navbtn.active{background:#1375e9;color:white;border-color:#3998ff}.navbtn:hover:not(.active){background:#102a4a}.content{display:flex;flex-direction:column;gap:15px;min-width:0}.controls{padding:17px}.control-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.control-group{min-width:0;border-right:1px solid var(--line);padding-right:14px}.control-group:last-child{border:0}.control-group h3,.panel h2{font-size:16px;margin:0 0 12px}.field{margin:12px 0}.field label{display:flex;justify-content:space-between;gap:8px;color:#c9def8;font-size:13px;margin-bottom:5px}.field input[type=range]{width:100%;accent-color:var(--blue)}.numrow{display:flex;gap:7px;align-items:center}.numrow input[type=number]{width:100%;min-width:0;background:#061429;border:1px solid #2b527f;border-radius:8px;color:white;padding:8px}.field select,.select{width:100%;background:#07182e;color:var(--text);border:1px solid #2b527f;border-radius:9px;padding:9px}.hint{font-size:11px;color:var(--muted);display:flex;justify-content:space-between}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.visual{padding:12px}.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.tab{padding:8px 12px;font-size:13px}.tab.active{background:#1375e9;border-color:#3998ff}.plotwrap{background:#041020;border:1px solid #1b3e65;border-radius:11px;margin:9px 0;overflow:hidden}.plothead{display:flex;justify-content:space-between;gap:8px;padding:8px 11px 0;font-size:12px;color:#c8ddf8}.plothead small{color:var(--muted)}canvas{display:block;width:100%;height:150px}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.metric{padding:12px;border-radius:13px;background:#0a1c34;border:1px solid var(--line)}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{display:block;font-size:19px;margin-top:4px;overflow-wrap:anywhere}.metric:nth-child(1) strong{color:var(--green)}.metric:nth-child(2) strong{color:var(--cyan)}.metric:nth-child(3) strong{color:var(--yellow)}.metric:nth-child(4) strong{color:var(--pink)}.right{display:flex;flex-direction:column;gap:14px;align-self:start}.info{padding:15px}.kv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #183454;font-size:13px}.kv span:first-child{color:var(--muted)}.formula{background:#06152a;border:1px solid #1f78ba;padding:13px;border-radius:10px;margin-top:10px;font-family:Georgia,serif;text-align:center;font-size:17px;overflow-wrap:anywhere}.presetgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.presetgrid button{font-size:12px}.callout{padding:12px;background:#102947;border-radius:10px;color:#c7ddf6;font-size:13px}.hidden{display:none!important}.lower{max-width:1600px;margin:0 auto;padding:0 18px 24px;display:grid;grid-template-columns:1fr 1fr;gap:15px}.lower .panel{padding:16px}.lower h2{margin-top:0}.checkrow{display:flex;gap:8px;align-items:center;margin:8px 0;font-size:13px;color:#c9def8}.checkrow input{accent-color:var(--blue)}.notice{font-size:12px;color:var(--muted)}.pill{display:inline-block;padding:3px 8px;border-radius:99px;background:#12385a;color:#8edfff;font-size:11px}.comparegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.comparegrid .metric{padding:9px}.footer{text-align:center;color:#708aaa;padding:18px;font-size:12px}
+@media(max-width:1150px){.layout{grid-template-columns:190px minmax(0,1fr)}.right{grid-column:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.control-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.control-group:nth-child(2){border-right:0}.control-group:last-child{grid-column:1/-1;border-top:1px solid var(--line);padding-top:12px}}@media(max-width:760px){.top{position:static}.layout{grid-template-columns:1fr;padding:10px}.side{order:0}.navlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}.navbtn{font-size:13px;padding:8px}.content{order:1}.right{grid-column:auto;display:grid;grid-template-columns:1fr}.control-grid{grid-template-columns:1fr;gap:5px}.control-group,.control-group:nth-child(2){border-right:0;border-bottom:1px solid var(--line);padding:0 0 10px}.control-group:last-child{grid-column:auto;border:0}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.lower{grid-template-columns:1fr;padding:0 10px 18px}.metric strong{font-size:17px}canvas{height:140px}}@media(max-width:390px){.navlist{grid-template-columns:1fr}.top-actions .btn{padding:7px 9px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><div class="logo">〰</div><div><h1>Modulation Simulator Lab</h1><div class="subtitle">Explore · Visualize · Learn · Experiment</div></div></div>
+  <div class="top-actions"><button class="btn" id="themeBtn">☼ / ☾ Theme</button><button class="btn" id="helpBtn">ⓘ How to use</button><button class="btn" id="downloadBtn">⇩ Export CSV</button></div>
+</header>
+<div class="layout">
+  <aside class="panel side">
+    <div class="section-title">Modulation type</div>
+    <div class="navlist" id="modNav">
+      <button class="navbtn active" data-mod="AM"><span>〰</span>AM (DSB-FC)</button>
+      <button class="navbtn" data-mod="DSBSC"><span>∿</span>AM (DSB-SC)</button>
+      <button class="navbtn" data-mod="SSB-USB"><span>↗</span>SSB · USB</button>
+      <button class="navbtn" data-mod="SSB-LSB"><span>↘</span>SSB · LSB</button>
+      <button class="navbtn" data-mod="VSB"><span>≈</span>VSB</button>
+      <button class="navbtn" data-mod="FM"><span>〽</span>FM (NBFM/WBFM)</button>
+      <button class="navbtn" data-mod="PM"><span>∿</span>PM</button>
+      <button class="navbtn" data-mod="ASK"><span>▥</span>ASK / OOK</button>
+      <button class="navbtn" data-mod="FSK"><span>∿</span>FSK</button>
+      <button class="navbtn" data-mod="BPSK"><span>⌁</span>BPSK</button>
+      <button class="navbtn" data-mod="QPSK"><span>✣</span>QPSK</button>
+      <button class="navbtn" data-mod="PSK8"><span>✳</span>8-PSK</button>
+      <button class="navbtn" data-mod="PSK16"><span>✳</span>16-PSK</button>
+      <button class="navbtn" data-mod="QAM16"><span>▦</span>16-QAM</button>
+      <button class="navbtn" data-mod="QAM64"><span>▦</span>64-QAM</button>
+      <button class="navbtn" data-mod="QAM256"><span>▦</span>256-QAM</button>
+    </div>
+    <div class="callout" style="margin-top:12px"><strong>💡 Tip</strong><br>Change one parameter at a time. Watch the signal and spectrum respond, then compare against the formula.</div>
+  </aside>
+  <main class="content">
+    <section class="panel controls">
+      <div class="control-grid">
+        <div class="control-group">
+          <h3>Message / data signal</h3>
+          <div class="field"><label for="wave">Message waveform</label><select id="wave"><option value="sine">Sine wave</option><option value="square">Square wave</option><option value="triangle">Triangle wave</option><option value="saw">Sawtooth wave</option></select></div>
+          <div class="field"><label for="fm">Message frequency (fm)</label><div class="numrow"><input id="fm" type="range" min="0.1" max="50000" step="0.1" value="1000"><input id="fmN" type="number" min="0.1" max="50000" step="any" value="1000"></div><div class="hint"><span>0.1 Hz</span><span>50 kHz</span></div></div>
+          <div class="field"><label for="Am">Message amplitude (Am)</label><div class="numrow"><input id="Am" type="range" min="0" max="100" step="0.1" value="1"><input id="AmN" type="number" min="0" max="100" step="any" value="1"></div><div class="hint"><span>0</span><span>100 units</span></div></div>
+          <div class="field"><label for="bits">Digital bit pattern</label><input class="select" id="bits" value="10110010" maxlength="32" pattern="[01]*"></div>
+        </div>
+        <div class="control-group">
+          <h3>Carrier / transmission</h3>
+          <div class="field"><label for="fc">Carrier frequency (fc)</label><div class="numrow"><input id="fc" type="range" min="1" max="500000" step="1" value="10000"><input id="fcN" type="number" min="1" max="500000" step="any" value="10000"></div><div class="hint"><span>1 Hz</span><span>500 kHz</span></div></div>
+          <div class="field"><label for="Ac">Carrier amplitude (Ac)</label><div class="numrow"><input id="Ac" type="range" min="0.1" max="100" step="0.1" value="5"><input id="AcN" type="number" min="0.1" max="100" step="any" value="5"></div><div class="hint"><span>0.1</span><span>100 units</span></div></div>
+          <div class="field"><label for="noise">Noise / SNR (dB)</label><div class="numrow"><input id="noise" type="range" min="-10" max="60" step="1" value="60"><input id="noiseN" type="number" min="-10" max="60" step="1" value="60"></div><div class="hint"><span>−10 dB (noisy)</span><span>60 dB (clean)</span></div></div>
+          <div class="field"><label for="duration">Display duration</label><select id="duration"><option value="0.001">1 ms</option><option value="0.005">5 ms</option><option value="0.01">10 ms</option><option value="0.02" selected>20 ms</option><option value="0.1">100 ms</option><option value="1">1 s</option></select></div>
+        </div>
+        <div class="control-group">
+          <h3>Modulation parameters</h3>
+          <div class="field" id="miField"><label for="mi">Modulation index (μ)</label><div class="numrow"><input id="mi" type="range" min="0" max="5" step="0.01" value="0.8"><input id="miN" type="number" min="0" max="5" step="any" value="0.8"></div><div class="hint"><span>0</span><span>5</span></div></div>
+          <div class="field" id="devField"><label for="dev">Frequency deviation (Δf, Hz)</label><div class="numrow"><input id="dev" type="range" min="1" max="100000" step="1" value="2400"><input id="devN" type="number" min="1" max="100000" step="any" value="2400"></div><div class="hint"><span>1 Hz</span><span>100 kHz</span></div></div>
+          <div class="field" id="phaseField"><label for="phase">Phase deviation (degrees)</label><div class="numrow"><input id="phase" type="range" min="0" max="360" step="1" value="90"><input id="phaseN" type="number" min="0" max="360" step="any" value="90"></div></div>
+          <div class="field"><label for="rate">Digital symbol rate (symbols/s)</label><div class="numrow"><input id="rate" type="range" min="1" max="100000" step="1" value="1000"><input id="rateN" type="number" min="1" max="100000" step="any" value="1000"></div></div>
+          <div class="field"><label for="vestige">VSB opposite-sideband fraction</label><div class="numrow"><input id="vestige" type="range" min="0" max="1" step="0.01" value="0.2"><input id="vestigeN" type="number" min="0" max="1" step="any" value="0.2"></div></div>
+          <div class="actions"><button class="btn primary" id="runBtn">▶ Run simulation</button><button class="btn" id="resetBtn">↻ Reset</button></div>
+          <div class="notice" id="status" aria-live="polite">Ready · live preview enabled</div>
+        </div>
+      </div>
+    </section>
+    <section class="panel visual">
+      <div class="tabs" id="viewTabs">
+        <button class="tab active" data-view="time">Time domain</button><button class="tab" data-view="spectrum">Frequency spectrum</button><button class="tab" data-view="constellation">Constellation</button><button class="tab" data-view="eye">Eye diagram</button>
+      </div>
+      <div id="timeView">
+        <div class="plotwrap"><div class="plothead"><strong>Message / data signal m(t)</strong><small id="messageLabel">fm = 1.00 kHz</small></div><canvas id="messagePlot"></canvas></div>
+        <div class="plotwrap"><div class="plothead"><strong>Carrier signal c(t)</strong><small id="carrierLabel">fc = 10.00 kHz</small></div><canvas id="carrierPlot"></canvas></div>
+        <div class="plotwrap"><div class="plothead"><strong>Modulated signal s(t)</strong><small id="modLabel">μ = 0.80</small></div><canvas id="modPlot"></canvas></div>
+      </div>
+      <div id="spectrumView" class="hidden"><div class="plotwrap"><div class="plothead"><strong>Approximate magnitude spectrum</strong><small>FFT · normalized magnitude</small></div><canvas id="spectrumPlot" style="height:300px"></canvas></div><p class="notice">Spectrum is estimated from sampled data. Windowing and finite display duration can cause spectral leakage.</p></div>
+      <div id="constellationView" class="hidden"><div class="plotwrap"><div class="plothead"><strong>Constellation diagram</strong><small>I / Q symbol points</small></div><canvas id="constellationPlot" style="height:330px"></canvas></div><p class="notice">Constellation is meaningful for PSK/QAM digital modes; analog modes show a reference circle or sampled signal projection.</p></div>
+      <div id="eyeView" class="hidden"><div class="plotwrap"><div class="plothead"><strong>Eye diagram (illustrative sampled traces)</strong><small>Overlaid symbol intervals</small></div><canvas id="eyePlot" style="height:300px"></canvas></div><p class="notice">Eye diagram uses simulated baseband symbol traces; pulse shaping and timing assumptions are simplified.</p></div>
+    </section>
+    <section class="metrics">
+      <div class="metric"><small>Message frequency</small><strong id="mMetric">1.00 kHz</strong></div>
+      <div class="metric"><small>Carrier frequency</small><strong id="cMetric">10.00 kHz</strong></div>
+      <div class="metric"><small>Modulation index</small><strong id="iMetric">0.80</strong></div>
+      <div class="metric"><small>Estimated bandwidth</small><strong id="bMetric">2.00 kHz</strong></div>
+    </section>
+  </main>
+  <aside class="right">
+    <section class="panel info"><h2>Key information</h2>
+      <div class="kv"><span>Modulation</span><strong id="iType">AM (DSB-FC)</strong></div>
+      <div class="kv"><span>Message frequency</span><strong id="iFm">1.00 kHz</strong></div>
+      <div class="kv"><span>Message amplitude</span><strong id="iAm">1.00</strong></div>
+      <div class="kv"><span>Carrier frequency</span><strong id="iFc">10.00 kHz</strong></div>
+      <div class="kv"><span>Carrier amplitude</span><strong id="iAc">5.00</strong></div>
+      <div class="kv"><span>Modulation index</span><strong id="iMi">0.80</strong></div>
+      <div class="kv"><span>Estimated bandwidth</span><strong id="iBw">2.00 kHz</strong></div>
+      <div class="kv"><span>Peak modulated amplitude</span><strong id="iPeak">9.00</strong></div>
+      <h2 style="margin-top:15px">Formula</h2><div class="formula" id="formula">s(t) = Ac [1 + μm(t)] cos(2πfct)</div><p class="notice" id="formulaNote">For conventional AM with a normalized message waveform.</p>
+    </section>
+    <section class="panel info"><h2>Quick presets</h2><div class="presetgrid">
+      <button class="btn" data-preset="standard">Standard AM</button><button class="btn" data-preset="over">Overmodulated AM</button>
+      <button class="btn" data-preset="low">Low modulation</button><button class="btn" data-preset="fm">Wideband FM</button>
+      <button class="btn" data-preset="nbfm">Narrowband FM</button><button class="btn" data-preset="noisy">Noisy channel</button>
+      <button class="btn" data-preset="qam">16-QAM</button><button class="btn" data-preset="digital">Digital bits</button>
+    </div></section>
+    <section class="panel info"><h2>Learning tip</h2><div class="callout" id="learningTip">For conventional AM, μ ≤ 1 avoids envelope distortion. At μ &gt; 1, the envelope crosses zero and an envelope detector distorts the message.</div></section>
+  </aside>
+</div>
+<div class="lower">
+  <section class="panel"><h2>Experiment mode <span class="pill">Try it</span></h2><p id="experimentPrompt">What happens when the AM modulation index exceeds 1?</p><div class="actions"><button class="btn" data-experiment="0">AM overmodulation</button><button class="btn" data-experiment="1">FM bandwidth</button><button class="btn" data-experiment="2">Sidebands</button><button class="btn" data-experiment="3">Noise impact</button></div><p class="notice" id="experimentAnswer">Adjust μ above 1 and observe the envelope. Then compare the waveform with μ below 1.</p></section>
+  <section class="panel"><h2>Compare modulation types</h2><p class="notice">Choose a second mode to compare its key properties with the current mode.</p><select id="compareMode" class="select"><option value="FM">FM</option><option value="AM">AM</option><option value="DSBSC">DSB-SC</option><option value="SSB-USB">SSB-USB</option><option value="BPSK">BPSK</option><option value="QPSK">QPSK</option><option value="QAM16">16-QAM</option><option value="FSK">FSK</option></select><div class="comparegrid" style="margin-top:10px"><div class="metric"><small>Current mode</small><strong id="cmpA">AM</strong><small id="cmpAd">Amplitude varies</small></div><div class="metric"><small>Compare with</small><strong id="cmpB">FM</strong><small id="cmpBd">Frequency varies</small></div></div></section>
+</div>
+<div class="footer">Modulation Simulator Lab · Educational simulation, not calibrated RF design software.</div>
+<script>
+const $=id=>document.getElementById(id);
+const defaults={wave:'sine',fm:1000,Am:1,fc:10000,Ac:5,noise:60,duration:'0.02',mi:.8,dev:2400,phase:90,rate:1000,vestige:.2,bits:'10110010'};
+let mode='AM',view='time',running=true,customTheme=false,latest=[];
+const names={AM:'AM (DSB-FC)',DSBSC:'AM (DSB-SC)','SSB-USB':'SSB (USB)','SSB-LSB':'SSB (LSB)',VSB:'VSB',FM:'FM',PM:'PM',ASK:'ASK / OOK',FSK:'FSK',BPSK:'BPSK',QPSK:'QPSK','PSK8':'8-PSK','PSK16':'16-PSK',QAM16:'16-QAM',QAM64:'64-QAM',QAM256:'256-QAM'};
+const descriptions={AM:'Amplitude varies; conventional AM includes a carrier.',DSBSC:'Amplitude varies; carrier is suppressed.', 'SSB-USB':'Single upper sideband transmits one sideband.', 'SSB-LSB':'Single lower sideband transmits one sideband.',VSB:'One sideband plus a vestige of the other sideband.',FM:'Instantaneous frequency varies with the message.',PM:'Instantaneous phase varies with the message.',ASK:'Digital symbol amplitude represents the bits.',FSK:'Digital symbols use different carrier frequencies.',BPSK:'Two carrier phases represent binary symbols.',QPSK:'Four phase states represent two bits per symbol.',PSK8:'Eight phase states represent three bits per symbol.',PSK16:'Sixteen phase states represent four bits per symbol.',QAM16:'Amplitude and phase encode four bits per symbol.',QAM64:'Amplitude and phase encode six bits per symbol.',QAM256:'Amplitude and phase encode eight bits per symbol.'};
+const formulas={AM:'s(t) = Ac [1 + μ m(t)] cos(2πfc t)',DSBSC:'s(t) = Ac m(t) cos(2πfc t)','SSB-USB':'s(t) = Ac [m(t)cos(ωct) − m̂(t)sin(ωct)]','SSB-LSB':'s(t) = Ac [m(t)cos(ωct) + m̂(t)sin(ωct)]',VSB:'s(t) ≈ desired sideband + vestigial sideband',FM:'s(t) = Ac cos[2πfc t + β sin(2πfm t)]',PM:'s(t) = Ac cos[2πfc t + Δφ m(t)]',ASK:'s(t) = Aᵢ cos(2πfc t)',FSK:'s(t) = Ac cos[2πfᵢ t]',BPSK:'s(t) = Ac cos(2πfc t + πb)',QPSK:'s(t) = I cos(ωct) − Q sin(ωct)','PSK8':'s(t) = Ac cos(2πfc t + 2πk/8)','PSK16':'s(t) = Ac cos(2πfc t + 2πk/16)',QAM16:'s(t) = I cos(ωct) − Q sin(ωct)',QAM64:'s(t) = I cos(ωct) − Q sin(ωct)',QAM256:'s(t) = I cos(ωct) − Q sin(ωct)'};
+const tips={AM:'For conventional AM, μ ≤ 1 avoids envelope distortion. At μ > 1, the envelope crosses zero and an envelope detector distorts the message.',DSBSC:'DSB-SC suppresses the carrier, so it can be more power-efficient, but coherent detection is generally needed.','SSB-USB':'SSB sends one sideband, approximately halving the bandwidth of conventional DSB AM for a single-tone message.','SSB-LSB':'The lower sideband lies below the carrier frequency. SSB bandwidth is approximately the message bandwidth.',VSB:'VSB transmits one sideband and a small vestige of the other; it trades bandwidth for practical filter design.',FM:'Carson’s rule estimates FM bandwidth as B ≈ 2(Δf + fm). Larger deviation generally means larger bandwidth.',PM:'In PM, peak phase deviation is proportional to message amplitude; instantaneous frequency also changes when message phase changes.',ASK:'ASK encodes data in amplitude. OOK is a special case where one symbol turns the carrier off.',FSK:'FSK represents data using discrete frequencies. The frequency separation affects detection and occupied bandwidth.',BPSK:'BPSK uses two opposite phases and has two constellation points.',QPSK:'QPSK carries two bits per symbol using four phase states.',PSK8:'8-PSK carries three bits per symbol; adjacent points have smaller phase separation than QPSK.',PSK16:'16-PSK carries four bits per symbol but requires better noise performance than lower-order PSK.',QAM16:'16-QAM carries four bits per symbol by changing both amplitude and phase.',QAM64:'64-QAM carries six bits per symbol with tighter constellation spacing.',QAM256:'256-QAM carries eight bits per symbol but is more sensitive to noise and distortion.'};
+function val(k){return Number($(k).value)}
+function fmtHz(n){if(!isFinite(n))return '—';if(Math.abs(n)>=1e6)return (n/1e6).toFixed(2)+' MHz';if(Math.abs(n)>=1e3)return (n/1e3).toFixed(2)+' kHz';return n.toFixed(2)+' Hz'}
+function fmt(n,d=2){return Number(n).toFixed(d)}
+function getParams(){return {fm:val('fm'),Am:val('Am'),fc:val('fc'),Ac:val('Ac'),noise:val('noise'),duration:Number($('duration').value),mi:val('mi'),dev:val('dev'),phase:val('phase'),rate:val('rate'),vestige:val('vestige'),wave:$('wave').value,bits:($('bits').value.match(/[01]/g)||['1']).join('')}}
+function message(t,p){let x=2*Math.PI*p.fm*t;switch(p.wave){case'square':return Math.sin(x)>=0?1:-1;case'triangle':return 2/Math.PI*Math.asin(Math.sin(x));case'saw':return 2*((p.fm*t)-Math.floor(.5+p.fm*t));default:return Math.sin(x)}}
+function bitAt(t,p){let bits=p.bits||'1';return Number(bits[Math.floor(t*p.rate)%bits.length]||0)}
+function digitalSymbol(t,p){let bits=p.bits||'1011',n=Math.floor(t*p.rate)%bits.length;return Number(bits[n]||0)}
+function sample(t,p,m=mode){
+ let msg=message(t,p),car=Math.cos(2*Math.PI*p.fc*t),A=p.Ac,mi=p.mi;
+ if(['ASK','FSK','BPSK','QPSK','PSK8','PSK16','QAM16','QAM64','QAM256'].includes(m)){
+   let idx=Math.floor(t*p.rate),bits=p.bits||'10110010',b=Number(bits[idx%bits.length]||0);
+   if(m==='ASK')return A*(b?1:0)*car;
+   if(m==='FSK')return A*Math.cos(2*Math.PI*(p.fc+(b?Math.max(p.fm,p.rate/2):-Math.max(p.fm,p.rate/2)))*t);
+   if(m==='BPSK')return A*Math.cos(2*Math.PI*p.fc*t+(b?Math.PI:0));
+   let M= m==='QPSK'?4:m==='PSK8'?8:m==='PSK16'?16:m==='QAM16'?16:m==='QAM64'?64:256;
+   let symbol=Math.floor(t*p.rate)%M;
+   if(m.includes('QAM')){
+     let side=Math.sqrt(M),I=(symbol%side)-(side-1)/2,Q=Math.floor(symbol/side)-(side-1)/2;
+     return A*(I*Math.cos(2*Math.PI*p.fc*t)-Q*Math.sin(2*Math.PI*p.fc*t))/Math.max(1,side-1);
+   }
+   return A*Math.cos(2*Math.PI*p.fc*t+2*Math.PI*(symbol%M)/M);
+ }
+ if(m==='AM')return A*(1+mi*msg)*car;
+ if(m==='DSBSC')return A*msg*car;
+ if(m==='SSB-USB')return A*Math.cos(2*Math.PI*(p.fc+p.fm)*t);
+ if(m==='SSB-LSB')return A*Math.cos(2*Math.PI*(p.fc-p.fm)*t);
+ if(m==='VSB')return A*(Math.cos(2*Math.PI*(p.fc+p.fm)*t)+p.vestige*Math.cos(2*Math.PI*(p.fc-p.fm)*t));
+ if(m==='FM'){let beta=p.dev/Math.max(p.fm,.1);return A*Math.cos(2*Math.PI*p.fc*t+beta*Math.sin(2*Math.PI*p.fm*t));}
+ if(m==='PM')return A*Math.cos(2*Math.PI*p.fc*t+(p.phase*Math.PI/180)*msg);
+ return A*car;
+}
+function bw(p,m=mode){if(m==='AM'||m==='DSBSC'||m==='VSB')return 2*p.fm;if(m.startsWith('SSB'))return p.fm;if(m==='FM')return 2*(p.dev+p.fm);if(m==='PM')return 2*(p.phase/360*p.fm+p.fm);return p.rate}
+function peak(p,m=mode){if(m==='AM')return p.Ac*(1+p.mi);if(m==='DSBSC')return p.Ac;if(m==='FM'||m==='PM')return p.Ac;if(m==='VSB')return p.Ac*(1+p.vestige);return p.Ac}
+function setStatus(s){$('status').textContent=s}
+function drawPlot(canvas,arr,color,label,opts={}){const ctx=canvas.getContext('2d'),w=canvas.clientWidth||600,h=canvas.clientHeight||150,dpr=window.devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);ctx.fillStyle='#041020';ctx.fillRect(0,0,w,h);let left=38,right=10,top=12,bottom=23,pw=w-left-right,ph=h-top-bottom;ctx.strokeStyle='#173555';ctx.lineWidth=1;ctx.font='11px system-ui';ctx.fillStyle='#8faacb';for(let i=0;i<=4;i++){let y=top+ph*i/4;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-right,y);ctx.stroke();ctx.fillText((opts.max??1-(opts.max??1)*i/2).toFixed(1),4,y+4)}for(let i=0;i<=5;i++){let x=left+pw*i/5;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,h-bottom);ctx.stroke();ctx.fillText((i/5*(opts.duration||1)).toFixed(opts.duration<.01?4:3),x-12,h-6)}let max=opts.max||Math.max(1,...arr.map(Math.abs));ctx.strokeStyle=color;ctx.lineWidth=1.7;ctx.beginPath();arr.forEach((v,i)=>{let x=left+pw*i/Math.max(1,arr.length-1),y=top+ph/2-(v/max)*(ph/2*.88);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();ctx.fillStyle='#9db5d4';ctx.fillText(label,left,10)}
+function drawSpectrum(canvas,arr,p){let N=Math.min(512,arr.length),ctx=canvas.getContext('2d'),w=canvas.clientWidth||600,h=canvas.clientHeight||300,dpr=window.devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#041020';ctx.fillRect(0,0,w,h);let left=40,top=15,bottom=30,pw=w-left-12,ph=h-top-bottom;ctx.strokeStyle='#173555';for(let j=0;j<=4;j++){let y=top+j*ph/4;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(w-10,y);ctx.stroke()}let mags=[];for(let k=0;k<N/2;k++){let re=0,im=0;for(let n=0;n<N;n++){let a=2*Math.PI*k*n/N;re+=arr[Math.floor(n*arr.length/N)]*Math.cos(a);im-=arr[Math.floor(n*arr.length/N)]*Math.sin(a)}mags.push(Math.sqrt(re*re+im*im)/N)}let max=Math.max(...mags,1e-9);ctx.strokeStyle='#21d4fd';ctx.lineWidth=1.4;ctx.beginPath();mags.forEach((v,i)=>{let x=left+i*pw/mags.length,y=top+ph-(v/max)*ph;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();ctx.fillStyle='#9db5d4';ctx.font='11px system-ui';ctx.fillText('0 Hz',left,h-9);ctx.fillText('Increasing frequency →',w-145,h-9)}
+function constellation(canvas,p,m){let ctx=canvas.getContext('2d'),w=canvas.clientWidth||600,h=canvas.clientHeight||330,dpr=window.devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#041020';ctx.fillRect(0,0,w,h);let cx=w/2,cy=h/2,R=Math.min(w*.38,h*.38);ctx.strokeStyle='#23415f';ctx.beginPath();ctx.moveTo(cx,12);ctx.lineTo(cx,h-12);ctx.moveTo(12,cy);ctx.lineTo(w-12,cy);ctx.stroke();ctx.strokeStyle='#355678';ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.stroke();let M=m==='BPSK'?2:m==='QPSK'?4:m==='PSK8'?8:m==='PSK16'?16:m==='QAM16'?16:m==='QAM64'?64:m==='QAM256'?256:16;ctx.fillStyle='#27e0ad';for(let i=0;i<M;i++){let x,y;if(m.includes('QAM')){let s=Math.sqrt(M),I=i%s-(s-1)/2,Q=Math.floor(i/s)-(s-1)/2;x=cx+I/(s/2)*R*.85;y=cy-Q/(s/2)*R*.85}else{let a=2*Math.PI*i/M;x=cx+Math.cos(a)*R*.82;y=cy-Math.sin(a)*R*.82}ctx.beginPath();ctx.arc(x,y,Math.max(2,Math.min(5,6-M/80)),0,2*Math.PI);ctx.fill()}ctx.fillStyle='#9db5d4';ctx.font='12px system-ui';ctx.fillText('Q / imaginary',10,18);ctx.fillText('I / real →',w-80,h-10)}
+function eye(canvas,p){let ctx=canvas.getContext('2d'),w=canvas.clientWidth||600,h=canvas.clientHeight||300,dpr=window.devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.fillStyle='#041020';ctx.fillRect(0,0,w,h);let L=38,T=12,B=25,R=10,pw=w-L-R,ph=h-T-B;ctx.strokeStyle='#173555';for(let i=0;i<=4;i++){ctx.beginPath();ctx.moveTo(L,T+i*ph/4);ctx.lineTo(w-R,T+i*ph/4);ctx.stroke()}let bits=p.bits||'10110010',period=1/Math.max(1,p.rate);ctx.strokeStyle='#21d4fd';ctx.globalAlpha=.48;for(let j=0;j<bits.length;j++){ctx.beginPath();for(let i=0;i<=100;i++){let t=(i/100)*2*period,idx=Math.floor(t/period),frac=(t%period)/period,b0=Number(bits[(j+idx)%bits.length]),b1=Number(bits[(j+idx+1)%bits.length]),v=(b0*(1-frac)+b1*frac)*2-1;let x=L+i*pw/100,y=T+ph/2-v*ph*.4;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)}ctx.stroke()}ctx.globalAlpha=1;ctx.fillStyle='#9db5d4';ctx.font='11px system-ui';ctx.fillText('0',L,h-8);ctx.fillText('2 symbol periods →',w-130,h-8)}
+function render(){const p=getParams(),duration=p.duration;let N=Math.min(2400,Math.max(500,Math.floor(duration*Math.max(p.fc*8,p.fm*8,20000))));N=Math.min(N,2400);let arr=[],msg=[],car=[];for(let i=0;i<N;i++){let t=duration*i/N;msg.push(p.Am*message(t,p));car.push(p.Ac*Math.cos(2*Math.PI*p.fc*t));arr.push(sample(t,p));}latest=arr.map((v,i)=>({time:i*duration/N,message:msg[i],carrier:car[i],modulated:v}));$('messageLabel').textContent='fm = '+fmtHz(p.fm)+' · Am = '+fmt(p.Am);$('carrierLabel').textContent='fc = '+fmtHz(p.fc)+' · Ac = '+fmt(p.Ac);$('modLabel').textContent=mode+' · μ = '+fmt(p.mi);if(view==='time'){$('timeView').classList.remove('hidden');drawPlot($('messagePlot'),msg,'#27e0ad','Message', {max:Math.max(1,p.Am),duration});drawPlot($('carrierPlot'),car,'#21bfff','Carrier',{max:Math.max(1,p.Ac),duration});drawPlot($('modPlot'),arr,mode==='FM'?'#ffca55':'#ffca55','Modulated',{max:Math.max(1,...arr.map(Math.abs)),duration});}else if(view==='spectrum'){drawSpectrum($('spectrumPlot'),arr,p)}else if(view==='constellation'){constellation($('constellationPlot'),p,mode)}else{eye($('eyePlot'),p)}
+ const bandwidth=bw(p),idx=mode==='FM'?p.dev/Math.max(p.fm,.1):mode==='PM'?p.phase/180: p.mi;
+ $('mMetric').textContent=fmtHz(p.fm);$('cMetric').textContent=fmtHz(p.fc);$('iMetric').textContent=fmt(idx);$('bMetric').textContent=fmtHz(bandwidth);
+ $('iType').textContent=names[mode];$('iFm').textContent=fmtHz(p.fm);$('iAm').textContent=fmt(p.Am);$('iFc').textContent=fmtHz(p.fc);$('iAc').textContent=fmt(p.Ac);$('iMi').textContent=fmt(idx);$('iBw').textContent=fmtHz(bandwidth);$('iPeak').textContent=fmt(peak(p));$('formula').textContent=formulas[mode]||formulas.AM;$('formulaNote').textContent=descriptions[mode];$('learningTip').textContent=tips[mode];$('cmpA').textContent=names[mode];$('cmpAd').textContent=descriptions[mode];updateCompare();
+}
+function syncRange(id){let r=$(id),n=$(id+'N');r.addEventListener('input',()=>{n.value=r.value;render()});n.addEventListener('change',()=>{let min=Number(r.min),max=Number(r.max),v=Number(n.value);if(!Number.isFinite(v))v=min;v=Math.max(min,Math.min(max,v));n.value=v;r.value=v;render()})}
+['fm','Am','fc','Ac','noise','mi','dev','phase','rate','vestige'].forEach(syncRange);
+$('wave').addEventListener('change',render);$('bits').addEventListener('input',render);$('duration').addEventListener('change',render);
+$('modNav').addEventListener('click',e=>{let b=e.target.closest('[data-mod]');if(!b)return;mode=b.dataset.mod;document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x===b));$('miField').classList.toggle('hidden',!['AM','DSBSC','VSB'].includes(mode));$('devField').classList.toggle('hidden',mode!=='FM');$('phaseField').classList.toggle('hidden',mode!=='PM');render();setStatus('Loaded '+names[mode])});
+$('viewTabs').addEventListener('click',e=>{let b=e.target.closest('[data-view]');if(!b)return;view=b.dataset.view;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));['time','spectrum','constellation','eye'].forEach(v=>$(v+'View').classList.toggle('hidden',v!==view));render()});
+$('runBtn').onclick=()=>{running=!running;$('runBtn').textContent=running?'Ⅱ Pause preview':'▶ Run simulation';setStatus(running?'Simulation running · preview refreshed':'Preview paused');if(running)render()};
+$('resetBtn').onclick=()=>{Object.entries(defaults).forEach(([k,v])=>{if($(k))$(k).value=v;let n=$(k+'N');if(n)n.value=v});mode='AM';view='time';document.querySelectorAll('.navbtn').forEach(x=>x.classList.toggle('active',x.dataset.mod===mode));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===view));['time','spectrum','constellation','eye'].forEach(v=>$(v+'View').classList.toggle('hidden',v!==view));$('runBtn').textContent='▶ Run simulation';running=true;render();setStatus('Reset to default settings')};
+document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{let x=b.dataset.preset;if(x==='standard'){mode='AM';$('mi').value=$('miN').value=.8;$('fm').value=$('fmN').value=1000;$('fc').value=$('fcN').value=10000;$('noise').value=$('noiseN').value=60}else if(x==='over'){mode='AM';$('mi').value=$('miN').value=1.5}else if(x==='low'){mode='AM';$('mi').value=$('miN').value=.2}else if(x==='fm'){mode='FM';$('dev').value=$('devN').value=7500;$('fm').value=$('fmN').value=1000}else if(x==='nbfm'){mode='FM';$('dev').value=$('devN').value=100;$('fm').value=$('fmN').value=1000}else if(x==='noisy'){$('noise').value=$('noiseN').value=5}else if(x==='qam'){mode='QAM16'}else if(x==='digital'){mode='BPSK';$('bits').value='10110010'}document.querySelectorAll('.navbtn').forEach(n=>n.classList.toggle('active',n.dataset.mod===mode));$('miField').classList.toggle('hidden',!['AM','DSBSC','VSB'].includes(mode));$('devField').classList.toggle('hidden',mode!=='FM');$('phaseField').classList.toggle('hidden',mode!=='PM');render();setStatus('Preset loaded: '+b.textContent)});
+$('compareMode').addEventListener('change',updateCompare);
+function updateCompare(){let m=$('compareMode').value;$('cmpB').textContent=names[m];$('cmpBd').textContent=descriptions[m]}
+const experiments=[['What happens when the AM modulation index exceeds 1?','Set μ above 1. The envelope crosses zero, so a simple envelope detector cannot recover the message without distortion.'],['How does FM deviation affect bandwidth?','Use the FM mode and change Δf. Carson’s rule estimates bandwidth as 2(Δf + fm).'],['Where are AM sidebands?','For a single-tone message, sidebands occur at fc − fm and fc + fm. Conventional AM also contains a carrier at fc.'],['How does noise affect reception?','Reduce SNR to add a stronger illustrative noise component in later channel models. This simple preview currently changes the SNR setting but does not yet add random noise to the plotted signal.']];
+document.querySelectorAll('[data-experiment]').forEach(b=>b.onclick=()=>{let e=experiments[Number(b.dataset.experiment)];$('experimentPrompt').textContent=e[0];$('experimentAnswer').textContent=e[1]});
+$('downloadBtn').onclick=()=>{if(!latest.length)render();let csv='time_s,message,carrier,modulated\\n'+latest.map(r=>[r.time,r.message,r.carrier,r.modulated].join(',')).join('\\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='modulation-samples.csv';a.click();URL.revokeObjectURL(a.href);setStatus('CSV export created')};
+$('helpBtn').onclick=()=>alert('How to use the Modulation Simulator Lab\\n\\n1. Choose a modulation type on the left.\\n2. Change values with sliders or numeric boxes.\\n3. Select Time Domain, Frequency Spectrum, Constellation or Eye Diagram.\\n4. Try presets and experiment prompts.\\n5. Export sampled waveform data as CSV.\\n\\nEducational demo: spectrum and digital channel models are simplified; check formulas against your course material.');
+$('themeBtn').onclick=()=>{customTheme=!customTheme;document.body.style.filter=customTheme?'brightness(1.2) saturate(.8)':''};
+window.addEventListener('resize',()=>render());
+render();
+</script>
+</body>
+</html>
