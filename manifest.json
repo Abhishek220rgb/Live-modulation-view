@@ -1,3 +1,4 @@
+
 {
   "name": "Live Modulation View",
   "short_name": "Modulation",
@@ -8,6 +9,12 @@
   "background_color": "#071426",
   "theme_color": "#071426",
   "icons": [
+    {
+      "src": "./ac3.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "./ac2.png",
       "sizes": "512x512",
